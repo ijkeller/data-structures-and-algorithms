@@ -41,18 +41,12 @@ For example: 'Cat' would come before 'apple'
 const sortNames = (arr) => {
   // Solution code here...
   let newArray = []
-  arr.sort( (a,b) => {
-     newArray.push(a > b);
-  })
-  for (let i=0; i <= newArray.length; i++) {
-    if (newArray[i] == newArray[i].toLowerCase()) {
-      newArray.push(newArray.splice(newArray[i], 1)[0]);
-    }
-  }
+  newArray.push(arr.sort( (a,b) => {
+     return a < b;
+  }))
+  
   console.log(newArray)
   return newArray
-  
-
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -68,7 +62,7 @@ const sortNumbers = (arr) => {
   console.log(arr.sort( (a,b) => {
     return a > b;
   }))
-  return arr.sort( (a,b) => {
+  arr.sort( (a,b) => {
     return a > b;
   })
 };
@@ -151,10 +145,27 @@ For example, ['Alphabet', 'alphabet', 'carrot', 'Zebra'] is correctly sorted, an
 const alphabetizeBetter = (arr) => {
   // Solution code here...
   console.log(arr.sort( (a,b) => {
-    return a > b;
+    let firstWord = a.toLowerCase();
+    let secondWord = b.toLowerCase();
+    if (firstWord > secondWord) {
+      return 1;
+    } else if (firstWord === secondWord) {
+      return 0;
+    } else {
+      return -1;
+    }
+
   }))
   return arr.sort( (a,b) => {
-    return a > b;
+    let firstWord = a.toLowerCase();
+    let secondWord = b.toLowerCase();
+    if (firstWord > secondWord) {
+      return 1;
+    } else if (firstWord === secondWord) {
+      return 0;
+    } else {
+      return -1;
+    }
   })
 };
 
@@ -291,7 +302,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-describe('Testing challenge 4', () => {
+xdescribe('Testing challenge 4', () => {
   test('It should sort high-to-low the numbers in an array', () => {
     const nums = [3,4,5,6,7];
     expect(sortBackwards(nums)).toStrictEqual([7,6,5,4,3]);
@@ -302,7 +313,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-describe('Testing challenge 5', () => {
+xdescribe('Testing challenge 5', () => {
   test('It should sort strings alphabetically', () => {
     expect(alphabetize(['alphabet', 'Zebra', 'Alphabet', 'carrot'])).toStrictEqual([ 'Alphabet', 'Zebra', 'alphabet', 'carrot']);
     expect(alphabetize(['alphabet','Alphabet', 'carrot'])).toStrictEqual([ 'Alphabet', 'alphabet', 'carrot']);
@@ -310,7 +321,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-describe('Testing challenge 6', () => {
+xdescribe('Testing challenge 6', () => {
   test('It should sort items by their price', () => {
     expect(sortByPrice([
       {name: 'Sweatshirt', price: 45},
